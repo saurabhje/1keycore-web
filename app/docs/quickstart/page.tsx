@@ -1,4 +1,4 @@
-'ise client';
+"use client";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { Footer } from "@/components/CtaFooter";

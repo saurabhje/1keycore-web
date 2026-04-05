@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import AuthCard from "@/components/AuthCard";
@@ -11,7 +11,7 @@ interface FormErrors {
   general?: string;
 }
 
-export default function LoginPage() {
+function LoginPageContent() {
   const router       = useRouter();
   const searchParams = useSearchParams();
   const nextPath     = searchParams.get("next") ?? "/dashboard";
@@ -127,5 +127,13 @@ export default function LoginPage() {
         </Link>
       </p>
     </AuthCard>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginPageContent />
+    </Suspense>
   );
 }
