@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+
+  --bg:        #0d0f14;
+  --bg-2:      #111318;
+  --bg-3:      #161921;
+  --border:    rgba(255, 255, 255, 0.08);
+  --border-hv: rgba(184, 245, 66, 0.35);
+
+  --green:     #b8f542;
+  --green-dim: rgba(184, 245, 66, 0.12);
+  --green-glow:rgba(184, 245, 66, 0.06);
+  --teal:      #4ecdc4;
+  --teal-dim:  rgba(78, 205, 196, 0.12);
+
+  --text:      #e8eaf0;
+  --text-2:    #8b8fa8;
+  --text-3:    #555870;
+
+  --radius:    6px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Fade-up animation ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade       { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.fade-d1    { animation-delay: 0.05s; }
+.fade-d2    { animation-delay: 0.15s; }
+.fade-d3    { animation-delay: 0.25s; }
+.fade-d4    { animation-delay: 0.38s; }
+.fade-d5    { animation-delay: 0.52s; }
+
+/* ── Shared section divider ── */
+.section-divider {
+  border-bottom: 1px solid var(--border);
+}

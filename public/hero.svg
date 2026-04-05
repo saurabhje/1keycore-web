@@ -1,0 +1,67 @@
+<svg width="680" height="380" viewBox="80 50 520 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes fd1{to{stroke-dashoffset:-28}}
+    @keyframes gp{0%,100%{opacity:.5}50%{opacity:1}}
+    @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    .a1{stroke-dasharray:7 4;animation:fd1 2.5s linear infinite}
+    .gp{animation:gp 2s ease-in-out infinite}
+    .gf{animation:fl 4.5s ease-in-out infinite;transform-origin:340px 190px}
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b8f542" />
+    </marker>
+    <marker id="arrow-dim" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,255,255,0.2)" />
+    </marker>
+  </defs>
+
+  <rect x="160" y="177" width="70" height="26" rx="4" fill="#111318" stroke="rgba(184,245,66,0.35)" stroke-width="0.8"/>
+  <text x="195" y="193" text-anchor="middle" font-family="monospace" font-size="12" font-weight="600" fill="#e8eaf0">app</text>
+
+  <path d="M230 185 C260 185, 270 170, 290 165" class="a1" stroke="#b8f542" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M230 190 C260 190, 270 190, 290 190" class="a1" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" fill="none" marker-end="url(#arrow-dim)"/>
+  <path d="M230 195 C260 195, 270 210, 290 215" class="a1" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" fill="none" marker-end="url(#arrow-dim)"/>
+
+  <g class="gf">
+    <path d="M340 130 L392 157 L340 184 L288 157 Z" fill="#101a10" stroke="#b8f542" stroke-width="1.2"/>
+    <path d="M288 157 L340 184 L340 254 L288 227 Z" fill="#0a120a" stroke="#b8f542" stroke-width="1.2"/>
+    <path d="M392 157 L340 184 L340 254 L392 227 Z" fill="#0d170d" stroke="#b8f542" stroke-width="1.2"/>
+    <path d="M349 180 L341 200 L347 200 L337 220 L349 200 L343 200 Z" fill="#b8f542" opacity="0.7"/>
+    <circle cx="340" cy="130" r="4" fill="#b8f542" class="gp"/>
+  </g>
+  <text x="315" y="155"
+        text-anchor="start"
+        font-family="monospace"
+        font-size="13"
+        font-weight="700" >
+    <tspan fill="#e8eaf0">1</tspan><tspan fill="#b8f542">key</tspan><tspan fill="#e8eaf0">Core</tspan>
+
+  </text>
+
+  <g opacity="0.8">
+    <rect x="375" y="128" width="44" height="20" rx="4" fill="#111318" stroke="rgba(78,205,196,0.25)" stroke-width="0.7"/>
+    <text x="397" y="140" text-anchor="middle" font-family="monospace" font-size="9" fill="#8b8fa8">Cache</text>
+    <rect x="305" y="248" width="70" height="20" rx="4" fill="#111318" stroke="rgba(255,255,255,0.1)" stroke-width="0.7"/>
+    <text x="350" y="261" text-anchor="middle" font-family="monospace" font-size="9" fill="#8b8fa8">Route &amp; Limit</text>
+  </g>
+
+  <path d="M392 157 C420 157, 430 100, 450 95" class="a1" stroke="#b8f542" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M392 175 C420 175, 430 198, 450 198" class="a1" stroke="#b8f542" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M392 210 C420 210, 430 295, 450 300" class="a1" stroke="#b8f542" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+  <g transform="translate(-70, 0)">
+    <rect x="520" y="73" width="52" height="44" rx="8" fill="#111318" stroke="rgba(255,255,255,0.15)" stroke-width="0.9"/>
+    <text x="546" y="92" text-anchor="middle" font-family="monospace" font-size="12" font-weight="700" fill="#e8eaf0">⊕</text>
+    <text x="546" y="108" text-anchor="middle" font-family="monospace" font-size="10" fill="#8b8fa8">openai</text>
+
+    <rect x="520" y="176" width="52" height="44" rx="8" fill="#111318" stroke="rgba(255,255,255,0.15)" stroke-width="0.9"/>
+    <text x="546" y="195" text-anchor="middle" font-family="monospace" font-size="12" font-weight="700" fill="#cf8c5d">A</text>
+    <text x="546" y="211" text-anchor="middle" font-family="monospace" font-size="10" fill="#8b8fa8">anthropic</text>
+
+    <rect x="520" y="278" width="52" height="44" rx="8" fill="#111318" stroke="rgba(255,255,255,0.15)" stroke-width="0.9"/>
+    <text x="546" y="297" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#e8eaf0">groq</text>
+    <text x="546" y="313" text-anchor="middle" font-family="monospace" font-size="10" fill="#8b8fa8">llama-3</text>
+  </g>
+</svg>
