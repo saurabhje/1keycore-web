@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section style={{ padding: "96px 0 80px", borderBottom: "1px solid var(--border)" }}>
       <div className="container mx-auto px-6" style={{ maxWidth: 1100 }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ gap: 68 }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ gap: 40 }}>
 
           {/* ── Left copy ── */}
           <div>
@@ -38,7 +38,7 @@ export default function Hero() {
               }}
             >
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--green)", display: "inline-block" }} />
-              AI Infrastructure Layer
+              REDUCE AI COSTS AUTOMATICALLY
             </div>
 
             {/* Headline */}
@@ -47,13 +47,13 @@ export default function Hero() {
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: "clamp(28px, 4vw, 46px)",
-                fontWeight: 700, lineHeight: 1.12,
+                fontWeight: 700, lineHeight: 1.05,
                 letterSpacing: "-0.03em", color: "var(--text)", marginBottom: 20,
               }}
             >
-              One key.<br />
+              One gateway.<br />
               <span style={{ color: "var(--green)" }}>Every model.</span><br />
-              Full control.
+              Lower AI costs.
             </h1>
 
             {/* Sub */}
@@ -61,9 +61,9 @@ export default function Hero() {
               className="fade fade-d3"
               style={{ fontSize: 16, color: "var(--text-2)", lineHeight: 1.75, marginBottom: 36, maxWidth: 420 }}
             >
-              Plug in your LLM API keys once. Give your team controlled,
-              audited access to any provider — with rate limiting, caching,
-              and full usage visibility.
+              Automatically route to cheaper models and 
+              cache responses to cut your AI costs, 
+              with built-in usage tracking and optional limits.
             </p>
 
             {/* Waitlist form */}
@@ -95,7 +95,7 @@ export default function Hero() {
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                Start Building
+                Start Saving Costs
               </Link>
               <Link
                 href="#"
@@ -128,14 +128,21 @@ export default function Hero() {
             </div>
           </div>
           
-          <div className="fade fade-d5" style={{ borderRadius: 8}}>
-            <Image
-              src="/hero.svg"
-              alt="1KeyCore gateway architecture"
-              width={680}
-              height={380}  
-              style={{ width: "115%", height: "auto", maxWidth: "none" }} priority
-            />
+         <div className="fade fade-d5 flex justify-center items-center">
+           <Image
+            src="/hero.svg"
+            alt="1KeyCore gateway architecture"
+            width={680}
+            height={380}
+            style={{
+              width: "140%",
+              maxWidth: "760px",
+              height: "auto",
+              transform: "translateY(-28px)",
+            }}
+
+            priority
+          />
           </div>
 
         </div>

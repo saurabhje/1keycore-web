@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { Footer } from "@/components/CtaFooter";
@@ -17,7 +17,7 @@ function CodeSnippet({ label, code }: { label: string; code: string }) {
         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff5f57", display: "inline-block" }} />
         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#febc2e", display: "inline-block" }} />
         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#28c840", display: "inline-block" }} />
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--text-3)", marginLeft: 6, letterSpacing: "0.06em" }}>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--text-3)", marginLeft: 6, letterSpacing: "0.06em" }}>
           {label}
         </span>
       </div>
@@ -64,19 +64,19 @@ export default function QuickstartPage() {
 
           {/* Breadcrumb */}
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 32 }}>
-            <Link href="/docs" style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--text-3)", textDecoration: "none" }}
+            <Link href="/docs" style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--text-3)", textDecoration: "none" }}
               onMouseEnter={e => (e.currentTarget.style.color = "var(--text-2)")}
               onMouseLeave={e => (e.currentTarget.style.color = "var(--text-3)")}
             >
               Docs
             </Link>
-            <span style={{ color: "var(--text-3)", fontSize: 12 }}>/</span>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--text-2)" }}>Quickstart</span>
+            <span style={{ color: "var(--text-3)", fontSize: 11 }}>/</span>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--text-2)" }}>Quickstart</span>
           </div>
 
           {/* Title */}
           <p style={{
-            fontFamily: "var(--font-mono)", fontSize: 12, fontWeight: 500,
+            fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 500,
             color: "var(--green)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 10,
           }}>
             // quickstart
@@ -93,7 +93,7 @@ export default function QuickstartPage() {
           </p>
 
           <Step n={1} title="Create an account">
-            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
+            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
               Sign up at{" "}
               <Link href="/signup" style={{ color: "var(--green)", textDecoration: "none", fontWeight: 600 }}>/signup</Link>
               {" "}— this gives you a tenant workspace. You&apos;ll land on the dashboard.
@@ -101,7 +101,7 @@ export default function QuickstartPage() {
           </Step>
 
           <Step n={2} title="Add a provider key">
-            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
+            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
               Go to{" "}
               <Link href="/dashboard/keys" style={{ color: "var(--green)", textDecoration: "none", fontWeight: 600 }}>Dashboard → API Keys</Link>
               , select your provider, paste your key, and click Save. It is AES-256 encrypted before storage — we never log the raw value.
@@ -109,7 +109,7 @@ export default function QuickstartPage() {
           </Step>
 
           <Step n={3} title="Get your JWT">
-            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
+            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
               After login, your session cookie holds the JWT. To use it in direct API calls, exchange it:
             </p>
             <CodeSnippet label="shell" code={`curl -X POST ${"`"}${process.env.NEXT_PUBLIC_API_URL ?? "https://api.1keycore.com"}/auth/token${"`"} \\
@@ -124,7 +124,7 @@ export default function QuickstartPage() {
           </Step>
 
           <Step n={4} title="Make your first request">
-            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
+            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
               Send a POST to <code style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--green)", background: "var(--green-dim)", padding: "1px 6px", borderRadius: 3 }}>/chat</code> with your JWT and the model you want to use. The gateway routes it to the right provider automatically.
             </p>
             <CodeSnippet label="shell" code={`curl -X POST ${"`"}${process.env.NEXT_PUBLIC_API_URL ?? "https://api.1keycore.com"}/chat${"`"} \\
@@ -144,7 +144,7 @@ export default function QuickstartPage() {
           </Step>
 
           <Step n={5} title="Invite your team">
-            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8 }}>
+            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8 }}>
               Team member invitations and scoped JWT issuance are coming in the next release. For now, share the workspace credentials with your team — each session gets its own token, tracked separately in usage.
             </p>
           </Step>

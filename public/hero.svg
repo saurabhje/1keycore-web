@@ -41,15 +41,26 @@
   </text>
 
   <g opacity="0.8">
+      <rect x="360" y="100" width="70" height="20" rx="4"
+          fill="#111318"
+          stroke="rgba(255,255,255,0.1)"
+          stroke-width="0.7"/>
+    <text x="350" y="110"
+          text-anchor="middle"
+          font-family="monospace"
+          font-size="9"
+          fill="#edeef0">
+      Usage Tracking
+    </text>
     <rect x="375" y="128" width="44" height="20" rx="4" fill="#111318" stroke="rgba(78,205,196,0.25)" stroke-width="0.7"/>
-    <text x="397" y="140" text-anchor="middle" font-family="monospace" font-size="9" fill="#8b8fa8">Cache</text>
+    <text x="397" y="140" text-anchor="middle" font-family="monospace" font-size="9" fill="#edeef0">Cache</text>
     <rect x="305" y="248" width="70" height="20" rx="4" fill="#111318" stroke="rgba(255,255,255,0.1)" stroke-width="0.7"/>
-    <text x="350" y="261" text-anchor="middle" font-family="monospace" font-size="9" fill="#8b8fa8">Route &amp; Limit</text>
+    <text x="350" y="261" text-anchor="middle" font-family="monospace" font-size="9" fill="#edeef0">Route &amp; Limit</text>
   </g>
 
-  <path d="M392 157 C420 157, 430 100, 450 95" class="a1" stroke="#b8f542" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
-  <path d="M392 175 C420 175, 430 198, 450 198" class="a1" stroke="#b8f542" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
-  <path d="M392 210 C420 210, 430 295, 450 300" class="a1" stroke="#b8f542" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M392 157 C420 157, 430 100, 450 95" class="a1" stroke="#b8f542" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+  <path d="M392 175 C420 175, 430 198, 450 198" class="a1" stroke="#b8f542" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+  <path d="M392 210 C420 210, 430 295, 450 300" class="a1" stroke="#b8f542" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
 
   <g transform="translate(-70, 0)">
     <rect x="520" y="73" width="52" height="44" rx="8" fill="#111318" stroke="rgba(255,255,255,0.15)" stroke-width="0.9"/>
