@@ -41,9 +41,9 @@
   </text>
 
   <g opacity="0.8">
-      <rect x="360" y="100" width="70" height="20" rx="4"
+      <rect x="312" y="97" width="75" height="20" rx="4"
           fill="#111318"
-          stroke="rgba(255,255,255,0.1)"
+          stroke="rgba(255, 255, 255, 0.20)"
           stroke-width="0.7"/>
     <text x="350" y="110"
           text-anchor="middle"
@@ -52,9 +52,9 @@
           fill="#edeef0">
       Usage Tracking
     </text>
-    <rect x="375" y="128" width="44" height="20" rx="4" fill="#111318" stroke="rgba(78,205,196,0.25)" stroke-width="0.7"/>
+    <rect x="378" y="128" width="35" height="20" rx="4" fill="#111318" stroke="rgba(78,205,196,0.25)" stroke-width="0.7"/>
     <text x="397" y="140" text-anchor="middle" font-family="monospace" font-size="9" fill="#edeef0">Cache</text>
-    <rect x="305" y="248" width="70" height="20" rx="4" fill="#111318" stroke="rgba(255,255,255,0.1)" stroke-width="0.7"/>
+    <rect x="315" y="248" width="70" height="20" rx="4" fill="#111318" stroke="rgba(255,255,255,0.25)" stroke-width="0.7"/>
     <text x="350" y="261" text-anchor="middle" font-family="monospace" font-size="9" fill="#edeef0">Route &amp; Limit</text>
   </g>
 

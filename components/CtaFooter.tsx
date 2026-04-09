@@ -5,8 +5,6 @@ import Link from "next/link";
 const FOOTER_LINKS = {
   Product: [
     { label: "Docs",     href: "/docs"    },
-    { label: "Pricing",  href: "/#pricing" },
-    { label: "Changelog",href: "#"         },
   ],
   Account: [
     { label: "Sign up",  href: "/signup"    },
@@ -15,7 +13,7 @@ const FOOTER_LINKS = {
   ],
   Source: [
     { label: "GitHub",   href: "https://github.com/saurabhje", external: true },
-    { label: "Twitter",  href: "#" },
+    { label: "Twitter",  href: "https://x.com/cachesaur", external: true },
   ],
 };
 
@@ -173,36 +171,6 @@ export function Footer() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom bar */}
-        <div style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          flexWrap: "wrap", gap: 12, padding: "20px 0",
-        }}>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--text-3)" }}>
-            Built in public by{" "}
-            <a href="https://github.com/saurabhje" target="_blank" rel="noopener noreferrer"
-              style={{ color: "var(--text-2)", textDecoration: "none" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "var(--text)")}
-              onMouseLeave={e => (e.currentTarget.style.color = "var(--text-2)")}
-            >
-              @saurabhje
-            </a>
-          </span>
-          <div style={{ display: "flex", gap: 20 }}>
-            {[{ label: "Terms", href: "#" }, { label: "Privacy", href: "#" }].map(l => (
-              <Link key={l.label} href={l.href} style={{
-                fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--text-3)",
-                textDecoration: "none", transition: "color 0.15s",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.color = "var(--text-2)")}
-              onMouseLeave={e => (e.currentTarget.style.color = "var(--text-3)")}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

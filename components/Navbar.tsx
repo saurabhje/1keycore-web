@@ -3,9 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const LINKS = [
-  { label: "Docs",    href: "/docs"                              },
-  { label: "Pricing", href: "/#pricing"                         },
-  { label: "GitHub",  href: "https://github.com/saurabhje", external: true },
+  { label: "Docs",    href: "/docs"},
 ];
 
 export default function Navbar() {
@@ -31,11 +29,10 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center" style={{ gap: 32 }}>
-            {LINKS.map(({ label, href, external }) => (
+            {LINKS.map(({ label, href }) => (
               <Link
                 key={label}
                 href={href}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 style={{
                   fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 400,
                   color: "var(--text-2)", textDecoration: "none", letterSpacing: "0.02em",
