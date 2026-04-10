@@ -39,7 +39,7 @@ export default function Hero() {
               }}
             >
               One gateway.<br />
-              <span style={{ color: "var(--green)" }}>Every model.</span><br />
+              <span style={{ color: "var(--green)" }}>Full control.</span><br />
               Lower AI costs.
             </h1>
 
