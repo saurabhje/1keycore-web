@@ -41,7 +41,7 @@
   </text>
 
   <g opacity="0.8">
-      <rect x="312" y="97" width="75" height="20" rx="4"
+      <rect x="312" y="97" width="77" height="22" rx="4"
           fill="#111318"
           stroke="rgba(255, 255, 255, 0.20)"
           stroke-width="0.7"/>

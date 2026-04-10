@@ -1,22 +1,9 @@
 "use client";
-import { useState } from "react";
-import GatewayPanel from "./GatewayPanel";
 import Image from "next/image";
 import Link from "next/link";
 
 
 export default function Hero() {
-  const [email, setEmail]   = useState("");
-  const [state, setState]   = useState<"idle"|"loading"|"done"|"error">("idle");
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email) return;
-    setState("loading");
-    // wire to your API: await fetch(`${process.env.NEXT_PUBLIC_API_URL}/waitlist`, ...)
-    await new Promise(r => setTimeout(r, 800)); // placeholder
-    setState("done");
-  }
 
   return (
     <section style={{ padding: "96px 0 80px", borderBottom: "1px solid var(--border)" }}>
@@ -66,13 +53,12 @@ export default function Hero() {
               with built-in usage tracking and optional limits.
             </p>
 
-            {/* Waitlist form */}
-                        <div
+            <div
               className="fade fade-d4 flex flex-wrap"
               style={{ gap: 12 }}
             >
               <Link
-                href="#"
+                href="/signup"
                 style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: 13,
@@ -98,7 +84,7 @@ export default function Hero() {
                 Start Saving Costs
               </Link>
               <Link
-                href="#"
+                href="/docs"
                 style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: 13,

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "1KeyCore — One key. Every model. Full control.",
+  title: "1KeyCore - Universal LLM Gateway for Cost Reduction",
   description:
     "Backend infrastructure that lets companies plug in their own LLM API keys and give employees controlled, audited access to any provider.",
   icons: {

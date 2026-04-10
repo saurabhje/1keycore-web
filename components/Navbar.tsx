@@ -95,11 +95,10 @@ export default function Navbar() {
           padding: "12px 24px 20px",
           gap: 4,
         }}>
-          {LINKS.map(({ label, href, external }) => (
+          {LINKS.map(({ label, href }) => (
             <Link
               key={label}
               href={href}
-              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               onClick={() => setMobileOpen(false)}
               style={{
                 fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-2)",
