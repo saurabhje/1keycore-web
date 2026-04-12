@@ -132,7 +132,7 @@ function CreateOrg() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orgs`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orgs/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

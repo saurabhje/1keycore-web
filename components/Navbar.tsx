@@ -6,7 +6,7 @@ const LINKS = [
   { label: "Docs",    href: "/docs"},
 ];
 
-export default function Navbar() {
+export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -44,7 +44,7 @@ export default function Navbar() {
                 {label}
               </Link>
             ))}
-
+            {!isLoggedIn && (
             <Link href="/login" style={{
               fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 500,
               color: "var(--text-2)", textDecoration: "none", letterSpacing: "0.02em",
@@ -55,8 +55,11 @@ export default function Navbar() {
             >
               Sign in
             </Link>
+          )}
 
-            <Link href="/signup" style={{
+            <Link 
+            href={isLoggedIn ? "/dashboard" : "/signup"}
+            style={{
               fontFamily: "var(--font-mono)", fontSize: 12, fontWeight: 600,
               background: "var(--green)", color: "#0d0f14",
               padding: "8px 18px", borderRadius: "var(--radius)",
@@ -66,7 +69,7 @@ export default function Navbar() {
             onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "translateY(-1px)"; }}
             onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
-              Get Started
+            {isLoggedIn ? "Go to Dashboard" : "Get Started"}
             </Link>
           </div>
 
@@ -109,20 +112,25 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+          {!isLoggedIn && (
           <Link href="/login" onClick={() => setMobileOpen(false)} style={{
             fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-2)",
             textDecoration: "none", padding: "10px 0", borderBottom: "1px solid var(--border)",
           }}>
             Sign in
           </Link>
-          <Link href="/signup" onClick={() => setMobileOpen(false)} style={{
+            )}
+
+          <Link 
+          href={isLoggedIn ? "/dashboard" : "/signup"}
+          onClick={() => setMobileOpen(false)} style={{
             display: "inline-block", marginTop: 12,
             fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600,
             background: "var(--green)", color: "#0d0f14",
             padding: "11px 20px", borderRadius: "var(--radius)",
             textDecoration: "none", textAlign: "center",
           }}>
-            Get Started
+            {isLoggedIn ? "Go to Dashboard" : "Get Started"}
           </Link>
         </div>
       )}

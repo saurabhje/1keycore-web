@@ -14,19 +14,12 @@ export function middleware(request: NextRequest) {
   const isProtected = PROTECTED.some(p => pathname.startsWith(p));
   const isOnboardingRoute = pathname.startsWith("/onboarding");
   const isAuthRoute = AUTH_ROUTES.some(p => pathname.startsWith(p));
-
+  const isHomePage = pathname === "/";
   // Unauthenticated user hitting a protected route → send to login
   if ((isProtected || isOnboardingRoute) && !token) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("next", pathname);
-    return NextResponse.redirect(url);
-  }
-
-  // Already logged-in user hitting login/signup → send to dashboard
-  if (isAuthRoute && token) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
@@ -36,6 +29,10 @@ export function middleware(request: NextRequest) {
       const payload = decodeJwt(token);
       const hastenant = !!payload.tenant_id;
 
+      if(hastenant && isHomePage) {
+        return NextResponse.redirect(new URL("/dashboard", request.url));
+      }
+      
       if (isAuthRoute) {
         return NextResponse.redirect(new URL(hastenant ? "/dashboard" : "/onboarding", request.url));
       }
