@@ -132,7 +132,7 @@ function CreateOrg() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orgs/`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/org/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -222,7 +222,7 @@ function JoinOrg() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orgs/join`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/org/join`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

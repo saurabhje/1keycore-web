@@ -69,7 +69,7 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
             onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "translateY(-1px)"; }}
             onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
-            {isLoggedIn ? "Go to Dashboard" : "Get Started"}
+            {isLoggedIn ? "Dashboard" : "Get Started"}
             </Link>
           </div>
 
@@ -130,7 +130,7 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
             padding: "11px 20px", borderRadius: "var(--radius)",
             textDecoration: "none", textAlign: "center",
           }}>
-            {isLoggedIn ? "Go to Dashboard" : "Get Started"}
+            {isLoggedIn ? "Dashboard" : "Get Started"}
           </Link>
         </div>
       )}
