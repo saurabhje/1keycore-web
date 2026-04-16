@@ -191,8 +191,8 @@ export default function DashboardShell({ children }: { children: React.ReactNode
 
             return (
               <Link
-                key={item.href}
-                href={item.href}
+                key={item.label}
+                href={item.href || "#"}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -241,13 +241,28 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--text)", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>acme-corp</div>
             <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--text-3)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>admin</div>
           </div>
-          <button title="Sign out" onClick={() => fetch("/api/auth/logout", { method: "POST" }).then(() => window.location.href = "/login")} style={{ color: "var(--text-3)", display: "flex", transition: "color 0.15s" }}
+          <button
+            title="Sign out"
+            onClick={async () => {
+              try {
+                await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+                  method: "POST",
+                  credentials: "include"
+                });
+              } catch (e) {
+                console.error("Logout failed", e);
+              } finally {
+                window.location.href = "/login";
+              }
+            }}
+            style={{ color: "var(--text-3)", display: "flex", transition: "color 0.15s" }}
             onMouseEnter={e => (e.currentTarget.style.color = "var(--text-2)")}
             onMouseLeave={e => (e.currentTarget.style.color = "var(--text-3)")}
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 2H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h3" />
-              <polyline points="10 10 13 7 10 4" /><line x1="13" y1="7" x2="5" y2="7" />
+              <polyline points="10 10 13 7 10 4" />
+              <line x1="13" y1="7" x2="5" y2="7" />
             </svg>
           </button>
         </div>
@@ -280,9 +295,9 @@ export default function DashboardShell({ children }: { children: React.ReactNode
           flexDirection: "column", padding: "12px 10px",
         }}>
           {NAV.map(item => {
-            const active = item.href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(item.href);
+            const active = item.href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(item.href || "#");
             return (
-              <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
+              <Link key={item.label} href={item.href || "#"} onClick={() => setMobileOpen(false)}
                 style={{
                   display: "flex", alignItems: "center", gap: 12,
                   padding: "12px 14px", marginBottom: 4, borderRadius: "var(--radius)",

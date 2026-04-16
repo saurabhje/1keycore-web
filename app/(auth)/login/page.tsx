@@ -51,6 +51,7 @@ function LoginPageContent() {
       }
 
       // Honour the ?next= param set by middleware
+      router.refresh();
       router.push(nextPath);
     } catch {
       setErrors({ general: "Network error — check your connection" });

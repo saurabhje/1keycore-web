@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageHeader from "@/components/dashboard/PageHeader";
 
 const PROVIDERS = [
@@ -15,14 +15,9 @@ interface SavedKey {
   id: string;
   provider: string;
   masked: string;
-  addedAt: string;
+  created_at: string;
 }
 
-// Mock existing keys — replace with real fetch from GET /keys
-const MOCK_KEYS: SavedKey[] = [
-  { id: "key_01", provider: "openai",    masked: "sk-...a3f9", addedAt: "2025-04-01" },
-  { id: "key_02", provider: "anthropic", masked: "sk-ant-...c7d2", addedAt: "2025-04-02" },
-];
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
@@ -32,12 +27,31 @@ export default function KeysPage() {
   const [keyFocused,  setKeyFocused]  = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [errorMsg,    setErrorMsg]    = useState("");
-  const [keys,        setKeys]        = useState<SavedKey[]>(MOCK_KEYS);
+  const [keys,        setKeys]        = useState<SavedKey[]>([]);
   const [revoking,    setRevoking]    = useState<string | null>(null);
   const [showForm,    setShowForm]    = useState(false);
 
   const selectedProvider = PROVIDERS.find(p => p.value === provider)!;
 
+  async function getKeys(){
+    try{
+      const rest = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/keys/list`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      })
+      if(rest.ok){
+        const data = await rest.json()
+        console.log(data)
+        setKeys(Array.isArray(data) ? data : data.keys || []);
+      }
+    }catch(e){
+      console.log("Error", e)
+    }
+  }
+  useEffect(() => {
+    getKeys()
+  }, [])
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!rawKey.trim()) return;
@@ -45,7 +59,7 @@ export default function KeysPage() {
     setErrorMsg("");
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/keys`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/keys/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -333,7 +347,7 @@ export default function KeysPage() {
 
                   {/* Added date */}
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--text-2)" }}>
-                    {key.addedAt}
+                    {key.created_at}
                   </span>
 
                   {/* Revoke */}

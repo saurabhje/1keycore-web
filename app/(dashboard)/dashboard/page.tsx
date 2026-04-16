@@ -1,23 +1,103 @@
 "use client";
 import Link from "next/link";
 import PageHeader from "@/components/dashboard/PageHeader";
-
-const STAT_CARDS = [
-  { label: "Total requests",   value: "—",    sub: "lifetime"         },
-  { label: "Tokens used",      value: "—",    sub: "this month"       },
-  { label: "Estimated cost",   value: "—",    sub: "this month"       },
-  { label: "Active keys",      value: "—",    sub: "across providers" },
-];
+import { useEffect, useState } from "react";
 
 const QUICK_LINKS = [
-  { href: "/dashboard/keys",  label: "Add your first API key",        desc: "Connect OpenAI, Anthropic, Gemini and more" },
-  { href: "/docs",            label: "Read the quickstart",           desc: "Make your first gateway request in 2 minutes" },
-  { href: "/dashboard/usage", label: "View usage breakdown",          desc: "Tokens, cost, and latency per user" },
+  { href: "/dashboard/keys",  label: "Add your first API key",     desc: "Connect OpenAI, Anthropic, Gemini and more" },
+  { href: "/docs",            label: "Read the quickstart",          desc: "Make your first gateway request in 2 minutes" },
+  { href: "/dashboard/usage", label: "View usage breakdown",         desc: "Tokens, cost, and latency per user" },
 ];
 
+// Helper to format large numbers like 1.2M or 340k
+const formatCompact = (num?: number | null) => {
+  if (num == null) return "—";
+  return Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(num);
+};
+
+const formatCurrency = (num?: number | null) => {
+  if (num == null) return "—";
+  return `$${num.toFixed(2)}`;
+};
+
 export default function DashboardPage() {
+  const [stats, setStats] = useState<any>({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/usage/summary`, {
+          credentials: "include",
+        });
+        if (!res.ok) throw new Error("Failed to fetch stats");
+        const data = await res.json();
+        setStats(data);
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  const getValue = (val: any, formatter: (v: any) => string = String) => {
+    if (loading || error || val == null) return "—";
+    return formatter(val);
+  };
+
+  // Dynamically build the cards based on state
+  const STAT_CARDS = [
+    { 
+      label: "Total requests", 
+      value: getValue(stats.total_requests, (v) => v.toLocaleString()), 
+      sub: "lifetime" 
+    },
+    { 
+      label: "Tokens used", 
+      value: getValue(stats.total_tokens, formatCompact), 
+      sub: "this month" 
+    },
+    { 
+      label: "Estimated cost", 
+      value: getValue(stats.estimated_cost_usd, formatCurrency), 
+      sub: "this month" 
+    },
+    { 
+      label: "Cache hit rate", 
+      value: getValue(stats.cache_hit_rate, (v) => `${v}%`), 
+      sub: "this month" 
+    },
+    { 
+      label: "Cache savings", 
+      value: getValue(stats.estimated_savings_usd, formatCurrency), 
+      sub: "saved this month" 
+    },
+    { 
+      label: "Active keys", 
+      value: getValue(stats.active_api_keys), 
+      sub: "across providers" 
+    },
+  ];
+
   return (
     <div>
+      {/* Inject skeleton keyframes */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 0.8; }
+        }
+        .loading-skeleton {
+          animation: skeleton-pulse 1.5s ease-in-out infinite;
+        }
+      `}} />
+
       <PageHeader
         label="// overview"
         title="Dashboard"
@@ -26,11 +106,14 @@ export default function DashboardPage() {
 
       {/* Stat grid */}
       <div style={{ padding: "28px 36px", borderBottom: "1px solid var(--border)" }}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-          gap: 12,
-        }}>
+        <div 
+          className={loading ? "loading-skeleton" : ""}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: 12,
+          }}
+        >
           {STAT_CARDS.map(s => (
             <div key={s.label} style={{
               background: "var(--bg-2)",
@@ -53,7 +136,7 @@ export default function DashboardPage() {
                 fontFamily: "var(--font-mono)",
                 fontSize: 26,
                 fontWeight: 700,
-                color: "var(--text)",
+                color: s.label === "Cache savings" ? "var(--green)" : "var(--text)", // Added a nice accent for savings
                 letterSpacing: "-0.03em",
                 lineHeight: 1,
                 marginBottom: 4,
