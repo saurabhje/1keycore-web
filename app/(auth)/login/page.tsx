@@ -14,7 +14,6 @@ interface FormErrors {
 function LoginPageContent() {
   const router       = useRouter();
   const searchParams = useSearchParams();
-  const nextPath     = searchParams.get("next") ?? "/dashboard";
 
   const [email,    setEmail]    = useState("");
   const [password, setPassword] = useState("");
@@ -49,9 +48,7 @@ function LoginPageContent() {
         setErrors({ general: data?.detail ?? "Invalid email or password" });
         return;
       }
-
-      // Honour the ?next= param set by middleware
-      window.location.href = nextPath;
+      window.location.href = "/";
     } catch {
       setErrors({ general: "Network error — check your connection" });
     } finally {
