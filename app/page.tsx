@@ -14,8 +14,8 @@ export default function Home() {
         <Hero/>
         <HowItWorks />
         <Features />
-        <ProvidersStats />
-        <CTASection />
+        {/* <ProvidersStats />
+        <CTASection /> */}
       </main>
       <Footer />
     </>
