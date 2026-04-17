@@ -161,6 +161,64 @@ export default function QuickstartPage({ isLoggedIn }: { isLoggedIn: boolean }) 
               <code style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--green)", background: "var(--green-dim)", padding: "1px 6px", borderRadius: 3 }}>model</code>{" "}
               field to route to a different provider.
             </p>
+            <div style={{ marginTop: 28 }}>
+  <p style={{
+    fontFamily: "var(--font-mono)", fontSize: 10,
+    color: "var(--text-3)", letterSpacing: "0.1em",
+    textTransform: "uppercase", marginBottom: 16
+  }}>
+    request fields
+  </p>
+
+  <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+
+    <div>
+      <p style={{
+        fontFamily: "var(--font-mono)", fontSize: 12,
+        color: "var(--green)", marginBottom: 6
+      }}>
+        best_model_choice
+      </p>
+      <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.7 }}>
+        Enables intelligent routing. When{" "}
+        <code style={{ fontFamily: "var(--font-mono)" }}>true</code>, the gateway
+        automatically selects the best model for the task based on performance,
+        cost, and latency.
+      </p>
+    </div>
+
+    <div>
+      <p style={{
+        fontFamily: "var(--font-mono)", fontSize: 12,
+        color: "var(--green)", marginBottom: 6
+      }}>
+        model
+      </p>
+      <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.7 }}>
+        Specifies the model explicitly. Overrides intelligent routing. Only a
+        small set of supported models are available currently (e.g.{" "}
+        <code style={{ fontFamily: "var(--font-mono)" }}>gpt-4o</code>,{" "}
+        <code style={{ fontFamily: "var(--font-mono)" }}>llama-3.3-70b-versatile</code>,{" "}
+        <code style={{ fontFamily: "var(--font-mono)" }}>openai/gpt-oss-120b</code>).
+      </p>
+    </div>
+
+    <div>
+      <p style={{
+        fontFamily: "var(--font-mono)", fontSize: 12,
+        color: "var(--green)", marginBottom: 6
+      }}>
+        temperature
+      </p>
+      <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.7 }}>
+        Controls randomness. Lower values (e.g.{" "}
+        <code style={{ fontFamily: "var(--font-mono)" }}>0</code>) produce more
+        deterministic responses, while higher values increase creativity.
+      </p>
+    </div>
+
+  </div>
+</div>
           </Step>
 
           <Step n={4} title="Invite your team">
