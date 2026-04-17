@@ -55,7 +55,10 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
   );
 }
 
-export default function QuickstartPage({isLoggedIn}: {isLoggedIn: boolean}) {
+const API = "https://1keyapi.saurabh.codes";
+const UI  = "https://1keycore.saurabh.codes";
+
+export default function QuickstartPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <>
       <Navbar isLoggedIn={isLoggedIn} />
@@ -89,63 +92,87 @@ export default function QuickstartPage({isLoggedIn}: {isLoggedIn: boolean}) {
           </h1>
           <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 48, borderBottom: "1px solid var(--border)", paddingBottom: 40 }}>
             From zero to a working LLM call through the 1KeyCore gateway in under 2 minutes.
-            You need a 1KeyCore account and at least one provider API key.
+            You need a 1KeyCore account and at least one provider API key added to your workspace.
           </p>
 
-          <Step n={1} title="Create an account">
-            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
+          <Step n={1} title="Create an account & workspace">
+            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
               Sign up at{" "}
-              <Link href="/signup" style={{ color: "var(--green)", textDecoration: "none", fontWeight: 600 }}>/signup</Link>
-              {" "}— this gives you a tenant workspace. You&apos;ll land on the dashboard.
+              <a href={`${UI}/signup`} target="_blank" rel="noreferrer" style={{ color: "var(--green)", textDecoration: "none", fontWeight: 600 }}>
+                1keycore.saurabh.codes/signup
+              </a>. After signup you&apos;ll go through a short onboarding — either{" "}
+              create a new workspace (you become the admin) or{" "}
+              join an existing one using an invite code from your admin.
+              You&apos;ll land on the dashboard once that&apos;s done.
             </p>
           </Step>
 
-          <Step n={2} title="Add a provider key">
-            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
-              Go to{" "}
-              <Link href="/dashboard/keys" style={{ color: "var(--green)", textDecoration: "none", fontWeight: 600 }}>Dashboard → API Keys</Link>
-              , select your provider, paste your key, and click Save. It is AES-256 encrypted before storage — we never log the raw value.
+          <Step n={2} title="Add a provider key (admins)">
+            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
+              If you&apos;re the workspace admin, go to{" "}
+              <Link href="/dashboard/keys" style={{ color: "var(--green)", textDecoration: "none", fontWeight: 600 }}>
+                Dashboard → API Keys
+              </Link>
+              , select a provider (OpenAI, Anthropic, Gemini…), paste your provider key, and click{" "}
+              Save key. The raw key is AES-256 encrypted on write — we never log or expose it.
+            </p>
+            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8 }}>
+              Once saved, each key gets a Request Key — a short token used as the{" "}
+              <code style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--green)", background: "var(--green-dim)", padding: "1px 6px", borderRadius: 3 }}>x-api-key</code>{" "}
+              header in every chat request. Click copy next to it in the keys table.
+            </p>
+            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginTop: 12 }}>
+              If you joined a workspace, the admin&apos;s keys are already available — head to{" "}
+              <Link href="/dashboard/keys" style={{ color: "var(--green)", textDecoration: "none", fontWeight: 600 }}>
+                Dashboard → API Keys
+              </Link>{" "}
+              to copy the request key for the provider you want to use.
             </p>
           </Step>
 
-          <Step n={3} title="Get your JWT">
-            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
-              After login, your session cookie holds the JWT. To use it in direct API calls, exchange it:
+          <Step n={3} title="Make your first request">
+            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
+              Send a <code style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--green)", background: "var(--green-dim)", padding: "1px 6px", borderRadius: 3 }}>POST</code> to{" "}
+              <code style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--green)", background: "var(--green-dim)", padding: "1px 6px", borderRadius: 3 }}>/chat</code>{" "}
+              with your Request Key in the{" "}
+              <code style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--green)", background: "var(--green-dim)", padding: "1px 6px", borderRadius: 3 }}>x-api-key</code>{" "}
+              header. The gateway resolves the provider and model automatically.
             </p>
-            <CodeSnippet label="shell" code={`curl -X POST ${"`"}${process.env.NEXT_PUBLIC_API_URL ?? "https://api.1keycore.com"}/auth/token${"`"} \\
-  -H "Content-Type: application/json" \\
-  -d '{"email": "you@company.com", "password": "••••••••"}'
-
-# Response
-{
-  "access_token": "eyJ...",
-  "token_type": "bearer"
-}`} />
-          </Step>
-
-          <Step n={4} title="Make your first request">
-            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
-              Send a POST to <code style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--green)", background: "var(--green-dim)", padding: "1px 6px", borderRadius: 3 }}>/chat</code> with your JWT and the model you want to use. The gateway routes it to the right provider automatically.
-            </p>
-            <CodeSnippet label="shell" code={`curl -X POST ${"`"}${process.env.NEXT_PUBLIC_API_URL ?? "https://api.1keycore.com"}/chat${"`"} \\
-  -H "Authorization: Bearer <your_jwt>" \\
+            <CodeSnippet label="shell" code={`curl -X POST ${API}/chat \\
+  -H "x-api-key: <your_request_key>" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "model":   "gpt-4o",
     "message": "Summarise this contract in 3 bullets"
+    "model":   "gpt-4o",
+    "temperature":"0"
+    "max_token":"2000",
+    "best_model_choice":"true",
+    "system_prompt": "string"
   }'`} />
             <CodeSnippet label="response · 200 OK" code={`{
-  "response":    "1. The contract grants...",
-  "model":       "gpt-4o",
-  "tokens":      312,
-  "latency_ms":  38,
-  "cached":      false
+  "response":   "1. The contract grants...",
+  "model":      "gpt-4o",
+  "tokens":     312,
+  "latency_ms": 38,
+  "cached":     false
 }`} />
+            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8 }}>
+              The same request key works for any provider key in your workspace — swap the{" "}
+              <code style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--green)", background: "var(--green-dim)", padding: "1px 6px", borderRadius: 3 }}>model</code>{" "}
+              field to route to a different provider.
+            </p>
           </Step>
 
-          <Step n={5} title="Invite your team">
-            <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.8 }}>
-              Team member invitations and scoped JWT issuance are coming in the next release. For now, share the workspace credentials with your team — each session gets its own token, tracked separately in usage.
+          <Step n={4} title="Invite your team">
+            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 16 }}>
+              As a workspace admin, go to{" "}
+              <Link href="/dashboard" style={{ color: "var(--green)", textDecoration: "none", fontWeight: 600 }}>
+                Dashboard
+              </Link>{" "}
+              click on Invite member and generate an invite code. Share it with your teammates — they enter it during onboarding to join your workspace and immediately get access to the keys you&apos;ve added.
+            </p>
+            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8 }}>
+              Each member&apos;s requests are tracked separately in usage, so you can see per-user consumption without sharing credentials.
             </p>
           </Step>
 
@@ -159,9 +186,9 @@ export default function QuickstartPage({isLoggedIn}: {isLoggedIn: boolean}) {
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {[
-                { label: "← Back to docs",        href: "/docs"           },
-                { label: "Go to dashboard →",      href: "/dashboard"      },
-                { label: "Add another key →",      href: "/dashboard/keys" },
+                { label: "← Back to docs",    href: "/docs"            },
+                { label: "Go to dashboard →",  href: "/dashboard"       },
+                { label: "Manage keys →",      href: "/dashboard/keys"  },
               ].map(l => (
                 <Link key={l.href} href={l.href} style={{
                   fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--text-2)",
@@ -175,6 +202,7 @@ export default function QuickstartPage({isLoggedIn}: {isLoggedIn: boolean}) {
               ))}
             </div>
           </div>
+
         </div>
       </main>
       <Footer />

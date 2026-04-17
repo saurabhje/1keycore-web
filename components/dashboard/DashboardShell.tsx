@@ -245,14 +245,15 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             title="Sign out"
             onClick={async () => {
               try {
-                await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
                   method: "POST",
                   credentials: "include"
                 });
+                if(res.ok){
+                   window.location.href = "/";
+                }
               } catch (e) {
                 console.error("Logout failed", e);
-              } finally {
-                window.location.href = "/login";
               }
             }}
             style={{ color: "var(--text-3)", display: "flex", transition: "color 0.15s" }}

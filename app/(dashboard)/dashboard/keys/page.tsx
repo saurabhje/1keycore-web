@@ -14,7 +14,7 @@ const PROVIDERS = [
 interface SavedKey {
   id: string;
   provider: string;
-  masked: string;
+  req_key: string;
   created_at: string;
 }
 
@@ -305,7 +305,7 @@ export default function KeysPage() {
               background: "var(--bg-3)",
               borderBottom: "1px solid var(--border)",
             }}>
-              {["Provider", "Key", "Added", ""].map(h => (
+              {["Provider", "x-api-key", "Added", ""].map(h => (
                 <div key={h} style={{
                   fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 500,
                   color: "var(--text-3)", letterSpacing: "0.1em", textTransform: "uppercase",
@@ -321,9 +321,10 @@ export default function KeysPage() {
                 <div
                   key={key.id}
                   style={{
-                    display: "grid", gridTemplateColumns: "1fr 1fr 1fr auto",
+                    display: "grid", gridTemplateColumns: "0.5fr 1fr 1fr auto",
                     alignItems: "center",
                     padding: "14px 20px",
+                    gap: "5px",
                     background: i % 2 === 0 ? "var(--bg-2)" : "var(--bg)",
                     borderBottom: i < keys.length - 1 ? "1px solid var(--border)" : "none",
                     transition: "background 0.15s",
@@ -341,8 +342,8 @@ export default function KeysPage() {
                   </span>
 
                   {/* Masked key */}
-                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--text-2)", letterSpacing: "0.04em" }}>
-                    {key.masked}
+                  <span style={{ display: "flex", alignItems:"center", justifyContent:"center", fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--text-2)", letterSpacing: "0.04em" }}>
+                    {key.req_key}
                   </span>
 
                   {/* Added date */}
