@@ -12,8 +12,8 @@ const FOOTER_LINKS = {
     { label: "Dashboard",href: "/dashboard" },
   ],
   Source: [
-    { label: "GitHub",   href: "https://github.com/", external: true },
-    { label: "Twitter",  href: "https://x.com/", external: true },
+    { label: "GitHub",   href: "https://github.com/saurabhje", external: true },
+    { label: "Twitter",  href: "https://x.com/cachesaur", external: true },
   ],
 };
 
